@@ -1,5 +1,5 @@
 {
-  "name": "05-mcps-do-zero-template",
+  "name": "mcp-lab",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -11,7 +11,7 @@
     "test:dev": "node --inspect --test --watch tests/**/*.test.ts"
   },
   "keywords": [],
-  "author": "erickwendel",
+  "author": "moreira-and",
   "license": "ISC",
   "type": "module",
   "engines": {
