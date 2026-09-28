@@ -72,8 +72,34 @@ describe('MCP Tool Tests', () => {
         )
     })
 
+    it.todo('should list the encryption:://info resource', async () => {
+        const { resources } = await client.listResources()
+        const info = resources.find(item => item.uri === 'encryption:://info')
+
+        assert.ok(info, 'encryption:://info resource should be listed!')
+    })
     
     after(async () => {
         await client.close()
+    })
+
+    it('should return the encrypt_message_prompt', async () => {
+        const result = await client.getPrompt({
+            name: 'encrypt_message_prompt',
+            arguments: {
+                message: 'Secret text',
+                encryptionKey,
+            }
+        })
+
+        const item = result.messages.at(0)?.content as unknown as { text: string}
+        const expected = `Please encrypt the following message using the encrypt_message tool.
+Message: Secret text
+Encryption key: my-super-passphrase`
+        assert.deepStrictEqual(
+             item.text,
+             expected,
+             'Prompt should be in the correct format'
+        )
     })
 })
